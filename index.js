@@ -15,7 +15,7 @@ async function serveAsync(dir, opts) {
   }
   dir = dir || process.cwd();
   opts = opts || {};
-  let port = opts.port || (await freeportAsync());
+  let port = opts.port || (await freeportAsync(8000));
   let app = express();
   let log = (...args) => {
     console.log(...args);
@@ -57,7 +57,9 @@ async function serveAsync(dir, opts) {
 }
 
 if (require.main === module) {
-  serveAsync(path.resolve(process.argv[2]));
+  let dir = process.argv[2];
+  dir = dir ? path.resolve(dir) : null;
+  serveAsync(dir);
 }
 
 module.exports = serveAsync;
