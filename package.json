@@ -1,0 +1,22 @@
+{
+  "name": "ghost-maker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ccheever/ghost-maker.git",
+  "author": "Charlie Cheever <ccheever@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "clipboardy": "^1.2.3",
+    "express": "^4.16.3",
+    "freeport-async": "^1.1.1",
+    "isobject": "^3.0.1",
+    "local-ipv4-address": "^0.0.2",
+    "ngrok": "^3.0.1"
+  },
+  "scripts": {
+    "start": "node ."
+  },
+  "bin": {
+    "ghost-maker": "./index.js"
+  }
+}
