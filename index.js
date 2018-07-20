@@ -6,6 +6,7 @@ let freeportAsync = require('freeport-async');
 let isobject = require('isobject');
 let localIpV4AddressAsync = require('local-ipv4-address');
 let ngrok = require('ngrok');
+let path = require('path');
 
 async function serveAsync(dir, opts) {
   if (isobject(dir)) {
@@ -37,7 +38,7 @@ async function serveAsync(dir, opts) {
   let tunnelUrl = (await ngrok.connect(port)) + main;
   await clipboardy.write(lanUrl);
 
-  // log('Listening on port ' + port + '\n');
+  log('// ghost-maker serving ' + dir + ' on port ' + port);
   log(localUrl);
   log(lanUrl);
   log(tunnelUrl);
@@ -50,11 +51,13 @@ async function serveAsync(dir, opts) {
       lan: lanUrl,
       tunnel: tunnelUrl,
     },
+    dir: dir,
+    main: main,
   };
 }
 
 if (require.main === module) {
-  serveAsync();
+  serveAsync(path.resolve(process.argv[2]));
 }
 
 module.exports = serveAsync;
