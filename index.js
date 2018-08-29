@@ -20,8 +20,12 @@ async function serveAsync(dir, opts) {
   let log = (...args) => {
     console.log(...args);
   };
+  let logError = (...args) => {
+    console.error(...args);
+  };
   if (opts.quiet) {
     log = () => {};
+    logError = () => {};
   }
   app.use(express.static(dir));
   await new Promise((resolve, reject) => {
@@ -35,13 +39,18 @@ async function serveAsync(dir, opts) {
   let localUrl = 'http://localhost:' + port + main;
   let lanIp = await localIpV4AddressAsync();
   let lanUrl = 'http://' + lanIp + ':' + port + main;
-  let tunnelUrl = (await ngrok.connect(port)) + main;
   await clipboardy.write(lanUrl);
 
   log('// ghost-maker serving ' + dir + ' on port ' + port);
   log(localUrl);
   log(lanUrl);
-  log(tunnelUrl);
+  let tunnelUrl;
+  try {
+    tunnelUrl = (await ngrok.connect(port)) + main;
+    log(tunnelUrl);
+  } catch (e) {
+    logError("Couldn't start ngrok tunnel");
+  }
 
   return {
     app,

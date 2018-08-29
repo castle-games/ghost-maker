@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-node --experimental-repl-await -i -e "ghostMaker=require('.');process.stdout.write('// ghostMaker\n> ');"
+node --experimental-repl-await -i -e "require('project-repl')('.', (x) => require(x));" $*

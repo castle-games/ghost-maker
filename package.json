@@ -1,6 +1,6 @@
 {
   "name": "ghost-maker",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "index.js",
   "repository": "https://github.com/ccheever/ghost-maker.git",
   "author": "Charlie Cheever <ccheever@gmail.com>",
@@ -18,5 +18,8 @@
   },
   "bin": {
     "ghost-maker": "./index.js"
+  },
+  "devDependencies": {
+    "project-repl": "^1.4.3"
   }
 }
